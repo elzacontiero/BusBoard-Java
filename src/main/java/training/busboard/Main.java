@@ -1,6 +1,5 @@
 package training.busboard;
 
-
 public class Main {
 
     /* unused code.
@@ -19,7 +18,6 @@ public class Main {
     */
 
     public static void main(String args[]) {
-
         PostCodeInfo postcodeInfo = PostCodeInfo.getPostCodeInfo("NW3 4BJ");
         System.out.println(postcodeInfo);
         StopPointsWithin stops = StopPointsWithin.getStopPointsWithin(postcodeInfo.result.latitude, postcodeInfo.result.longitude);
@@ -27,8 +25,6 @@ public class Main {
         for (StopPointsWithinInfo info : stops.stopPoints) {
             System.out.println(info);
         }
-
     }
-
 }
 

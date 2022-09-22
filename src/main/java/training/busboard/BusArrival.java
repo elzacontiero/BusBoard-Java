@@ -2,7 +2,6 @@ package training.busboard;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.glassfish.jersey.jackson.JacksonFeature;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
