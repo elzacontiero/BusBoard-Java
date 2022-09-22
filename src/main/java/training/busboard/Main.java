@@ -107,6 +107,19 @@ class StopPointsWithin {
 
     public StopPointsWithinInfo[] stopPoints;
 
+    // I create a method that given a lat and longitude it returns a list of StopPoints within
+    public static StopPointsWithin getStopPointsWithin(double lat, double lon) {
+        String endpoint = "https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanBusWayPoint," +
+                "NaptanOnstreetBusCoachStopCluster,NaptanOnstreetBusCoachStopPair," +
+                "NaptanPrivateBusCoachTram," +
+                "NaptanPublicBusCoachTram&modes=bus&lat=" + lat + "&lon=" + lon;
+        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
+        StopPointsWithin response = client.target(endpoint)
+                .request(MediaType.APPLICATION_JSON)
+                .get(StopPointsWithin.class);
+        return response;
+    }
+
     @Override
     public String toString() {
         return "StopPointsWithin{" +
@@ -116,8 +129,7 @@ class StopPointsWithin {
 }
 
 public class Main {
-
-    // Part 1 --------------------
+    
     public static void part1() {
         String tflEndpoint = "https://api.tfl.gov.uk/StopPoint/490008660N/Arrivals";
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
@@ -141,28 +153,12 @@ public class Main {
         return response;
     }
 
-    // Part 2 --------------------
-
-
-
-    // I create a method that given a lat and longitude it returns a list of StopPoints within
-    public static StopPointsWithin getStopPointsWithin(double lat, double lon) {
-        String endpoint = "https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanBusWayPoint," +
-                "NaptanOnstreetBusCoachStopCluster,NaptanOnstreetBusCoachStopPair," +
-                "NaptanPrivateBusCoachTram," +
-                "NaptanPublicBusCoachTram&modes=bus&lat=" + lat + "&lon=" + lon;
-        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        StopPointsWithin response = client.target(endpoint)
-                .request(MediaType.APPLICATION_JSON)
-                .get(StopPointsWithin.class);
-        return response;
-    }
 
     public static void main(String args[]) {
 
         PostCodeInfo postcodeInfo = PostCodeInfo.getPostCodeInfo("NW3 4BJ");
         System.out.println(postcodeInfo);
-        StopPointsWithin stops = getStopPointsWithin(postcodeInfo.result.latitude, postcodeInfo.result.longitude);
+        StopPointsWithin stops = StopPointsWithin.getStopPointsWithin(postcodeInfo.result.latitude, postcodeInfo.result.longitude);
 
         for (StopPointsWithinInfo info : stops.stopPoints) {
             System.out.println(info);
