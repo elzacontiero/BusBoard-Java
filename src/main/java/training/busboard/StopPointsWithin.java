@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class StopPointsWithin {
+public class StopPointsWithin {
 
     public StopPointsWithinInfo[] stopPoints;
 

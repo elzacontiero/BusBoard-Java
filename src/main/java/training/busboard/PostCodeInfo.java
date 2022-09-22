@@ -8,7 +8,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class PostCodeInfo {
+public class PostCodeInfo {
     public Integer status;
     public PostCodeResult result;
 

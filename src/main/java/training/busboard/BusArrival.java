@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class BusArrival {
+public class BusArrival {
 
     public String id;
     public String vehicleId;
