@@ -10,45 +10,6 @@ import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-class PostCodeResult {
-    public String postcode;
-    public Double longitude;
-    public Double latitude;
-
-    @Override
-    public String toString() {
-        return "PostCodeResult{" +
-                "postcode='" + postcode + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                '}';
-    }
-}
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-class PostCodeInfo {
-    public Integer status;
-    public PostCodeResult result;
-
-    public static PostCodeInfo getPostCodeInfo(String postCode) {
-
-        String endpoint = "http://api.postcodes.io/postcodes/" + postCode;
-        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        PostCodeInfo response = client.target(endpoint)
-                .request(MediaType.APPLICATION_JSON)
-                .get(PostCodeInfo.class);
-        return response;
-    }
-    @Override
-    public String toString() {
-        return "PostCodeInfo{" +
-                "status=" + status +
-                ", result=" + result +
-                '}';
-    }
-}
-
 public class Main {
 
     /* unused code.
