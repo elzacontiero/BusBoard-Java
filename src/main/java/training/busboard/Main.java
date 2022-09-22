@@ -1,15 +1,14 @@
 package training.busboard;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.core.MediaType;
 import org.glassfish.jersey.jackson.JacksonFeature;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 import java.util.List;
-
-import jakarta.ws.rs.core.GenericType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class BusArrival {
@@ -69,6 +68,15 @@ class PostCodeInfo {
     public Integer status;
     public PostCodeResult result;
 
+    public static PostCodeInfo getPostCodeInfo(String postCode) {
+
+        String endpoint = "http://api.postcodes.io/postcodes/" + postCode;
+        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
+        PostCodeInfo response = client.target(endpoint)
+                .request(MediaType.APPLICATION_JSON)
+                .get(PostCodeInfo.class);
+        return response;
+    }
     @Override
     public String toString() {
         return "PostCodeInfo{" +
@@ -135,15 +143,7 @@ public class Main {
 
     // Part 2 --------------------
 
-    public static PostCodeInfo getPostCodeInfo(String postCode) {
 
-        String endpoint = "http://api.postcodes.io/postcodes/" + postCode;
-        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        PostCodeInfo response = client.target(endpoint)
-                .request(MediaType.APPLICATION_JSON)
-                .get(PostCodeInfo.class);
-        return response;
-    }
 
     // I create a method that given a lat and longitude it returns a list of StopPoints within
     public static StopPointsWithin getStopPointsWithin(double lat, double lon) {
@@ -160,7 +160,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-        PostCodeInfo postcodeInfo = getPostCodeInfo("NW3 4BJ");
+        PostCodeInfo postcodeInfo = PostCodeInfo.getPostCodeInfo("NW3 4BJ");
         System.out.println(postcodeInfo);
         StopPointsWithin stops = getStopPointsWithin(postcodeInfo.result.latitude, postcodeInfo.result.longitude);
 
