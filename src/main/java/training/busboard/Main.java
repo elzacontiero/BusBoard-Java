@@ -27,6 +27,16 @@ class BusArrival {
     public String towards;
     public String expectedArrival;
 
+    public static List<BusArrival> getListOfBusArrival(String stopPoint) {
+        String endpoint = "https://api.tfl.gov.uk/StopPoint/" + stopPoint + "/Arrivals";
+        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
+        List<BusArrival> response = client.target(endpoint)
+                .request(MediaType.APPLICATION_JSON)
+                .get(new GenericType<List<BusArrival>>() {
+                });
+        return response;
+    }
+
     @Override
     public String toString() {
         return "BusArrival{" +
@@ -129,7 +139,7 @@ class StopPointsWithin {
 }
 
 public class Main {
-    
+
     public static void part1() {
         String tflEndpoint = "https://api.tfl.gov.uk/StopPoint/490008660N/Arrivals";
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
@@ -141,16 +151,6 @@ public class Main {
         for (BusArrival bus : response) {
             System.out.println(bus);
         }
-    }
-
-    public static List<BusArrival> givenStopCode(String stopPoint) {
-        String endpoint = "https://api.tfl.gov.uk/StopPoint/" + stopPoint + "/Arrivals";
-        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        List<BusArrival> response = client.target(endpoint)
-                .request(MediaType.APPLICATION_JSON)
-                .get(new GenericType<List<BusArrival>>() {
-                });
-        return response;
     }
 
 
