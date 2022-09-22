@@ -112,32 +112,6 @@ class StopPointsWithinInfo {
     }
 }
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-class StopPointsWithin {
-
-    public StopPointsWithinInfo[] stopPoints;
-
-    // I create a method that given a lat and longitude it returns a list of StopPoints within
-    public static StopPointsWithin getStopPointsWithin(double lat, double lon) {
-        String endpoint = "https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanBusWayPoint," +
-                "NaptanOnstreetBusCoachStopCluster,NaptanOnstreetBusCoachStopPair," +
-                "NaptanPrivateBusCoachTram," +
-                "NaptanPublicBusCoachTram&modes=bus&lat=" + lat + "&lon=" + lon;
-        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        StopPointsWithin response = client.target(endpoint)
-                .request(MediaType.APPLICATION_JSON)
-                .get(StopPointsWithin.class);
-        return response;
-    }
-
-    @Override
-    public String toString() {
-        return "StopPointsWithin{" +
-                "stopPoints=" + Arrays.toString(stopPoints) +
-                '}';
-    }
-}
-
 public class Main {
 
     /* unused code.
