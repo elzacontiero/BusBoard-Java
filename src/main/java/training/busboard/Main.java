@@ -140,6 +140,7 @@ class StopPointsWithin {
 
 public class Main {
 
+    /* unused code.
     public static void part1() {
         String tflEndpoint = "https://api.tfl.gov.uk/StopPoint/490008660N/Arrivals";
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
@@ -152,7 +153,7 @@ public class Main {
             System.out.println(bus);
         }
     }
-
+    */
 
     public static void main(String args[]) {
 
