@@ -1,14 +1,5 @@
 package training.busboard;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.glassfish.jersey.jackson.JacksonFeature;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import java.util.Arrays;
-import java.util.List;
 
 public class Main {
 
