@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Layout</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+          href="../../css/bootstrap.min.css" />
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" th:href="@{/}">BusBoard</a>
+</nav>
+
+<div layout:fragment="content"></div>
+</body>
+</html>

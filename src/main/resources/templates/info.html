@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+    <!--@thymesVar id="busInfo" type="training.busboard.web.BusInfo"-->
+
+    <head>
+        <title>Bus Information</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container body-content">
+            <h2>Bus Information</h2>
+            <div>
+                <p>You entered postcode <span th:text="${busInfo.postcode}"></span></p>
+            </div>
+        </div>
+    </body>
+</html>

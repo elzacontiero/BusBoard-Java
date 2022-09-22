@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Home page</title>
+</head>
+<body>
+<div layout:fragment="content" class="container body-content">
+    <div class="jumbotron">
+        <h1>BusBoard</h1>
+        <p class="lead">For all your bus info needs. Enter a postcode below and click enter to see bus times for that location.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="messageForm" th:action="@{/busInfo}" method="get">
+                <fieldset>
+                    <legend>Postcode: </legend>
+                    <input type="text" name="postcode">
+                    <input type="submit" value="Get Bus Info" />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
